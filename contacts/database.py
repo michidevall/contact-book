@@ -4,13 +4,13 @@
 
 
 from PyQt5.QtWidgets import QMessageBox
-from PyQt5.QtSql import QSqlDatabase
+# from PyQt5.QtSql import QSqlDatabase
 from PyQt5.QtSql import QSqlDatabase, QSqlQuery
 
 def _createContactsTable():
     """Create the contacts table in the database."""
     createTableQuery =QSqlQuery()
-    return createTableQuery.exec (
+    return createTableQuery.exec(
         """
         CREATE TABLE IF NOT EXISTS contacts (
             id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL,
@@ -26,12 +26,16 @@ def createConnection(databaseName):
     connection = QSqlDatabase.addDatabase("QSQLITE")
     connection.setDatabaseName (databaseName)
     
+
     if not connection.open():
         QMessageBox.warning(
             None,
             "Contact",
             f"Database Error: {connection.lastError().text()}",
         )
+     
         return False
+    
+    _createContactsTable()
     return True
     
