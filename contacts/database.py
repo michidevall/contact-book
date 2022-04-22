@@ -37,5 +37,6 @@ def createConnection(databaseName):
         return False
     
     _createContactsTable()
+    
     return True
     
