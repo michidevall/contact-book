@@ -27,4 +27,8 @@ class ContactsModel:
                 self.model.setData(self.model.index(rows, column + 1), field)
             self.model.submitAll()
             self.model.select()        
-        
+        def deleteContact(self, row):
+            """Remove a contact from the database."""
+            self.model.removeRow(row)
+            self.model.submitAll()
+            self.model.select()
